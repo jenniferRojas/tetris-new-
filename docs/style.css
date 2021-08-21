@@ -1,0 +1,14 @@
+body {
+    background-color: steelblue;
+  }
+  #map {
+    display: block;
+    margin: 10px auto 0 auto;
+    border: 1px solid white;
+  }
+  #score {
+    margin: 20px auto;
+    text-align: center;
+    font: 35px Comic Sans MS;
+    color: white;
+  }
