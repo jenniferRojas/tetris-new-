@@ -174,12 +174,12 @@ const canMoveLeft = (block, field) => {
     })
   })
 }
-
+//This function makes the figures come out and take the score that has been given by the eliminated line
 const updateScore = (score) => {
   const scoreElem = document.getElementById('score')
   scoreElem.innerHTML = score
 }
-
+//The functions change color determinedly from the position where it is
 const drawField = (field, ctx) => {
   field.forEach((row, rowIndex) => {
     row.forEach((cell, columnIndex) => {
@@ -197,7 +197,7 @@ const drawField = (field, ctx) => {
     })
   })
 }
-
+// This function is about the animation of how the game moves smoothly
 const { requestAnimationFrame } = window
 const fps = 24
 const timeToMoveDown = 500
@@ -207,6 +207,7 @@ let prevTime = 0
 let prevPosition = { x: 0, y: 0 }
 let prevBlockCells = [[]]
 
+//this function makes the blocks come out randomly depending on the block that fell and the travel time it has
 const render = (game, block, time) => {
   if (!block) {
     const arrOfTypes = Object.values(blockTypes)
@@ -220,7 +221,8 @@ const render = (game, block, time) => {
 
   const { ctx, field } = game
   const { position } = block
-
+ 
+  //the function of this is to make the chip go down slowly
   if (time - prevTime > 1000 / fps) {
     counterOfF++
     if (counterOfF === (fps * timeToMoveDown) / 1000) {
@@ -246,6 +248,7 @@ const render = (game, block, time) => {
       position.y = prevPosition.y + 1
     }
 
+    //the function of this is to make the chip go down slowly
 block.findCollison(field)
     if (block.isAlive) {
       insertIntoArray(block.cells, field, position.y, position.x)
@@ -290,6 +293,7 @@ const insertIntoArray = (childArr, parrentArr, row, col, clearMode) => {
   }
 }
 
+//This functionality changes the score depending on the lines that are being eliminated
 let score = 0
 const findFilledRow = (field) => {
   const filteredField = field.filter((row) => row.some((cell) => (cell === 0)))
@@ -300,11 +304,14 @@ const findFilledRow = (field) => {
   return [...filledArr, ...filteredField]
 }
 
+//It is where you can generalize the return of the refund progress of the pieces when being generated again
 const generateField = (rows, cols) => {
   const field = Array.from({length: rows},
     () => Array.from({length: cols}, () => 0))
   return field
 }
+
+//This makes the functionality of the canvas and its image in 2d
 
 window.onload = () => {
   const canvas = document.getElementById('map')
